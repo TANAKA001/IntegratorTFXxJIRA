@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gerenciamento de demandas</title>
+
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Content/AngularGrid/angularGrid.min.css" rel="stylesheet" />
+    <link href="../../Content/AngularGrid/theme-ons.css" rel="stylesheet" />
+    <link href="../../Content/handsontable/handsontable.min.css" rel="stylesheet" />
+    <link href="../../Content/ngDialog-theme-default.css" rel="stylesheet" />
+    
+    <link href="../../Content/bootstrap-datepicker.standalone.css" rel="stylesheet" />
+
+    <link href="../../Content/Site.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../../Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/angularGrid.js"></script>
+    <script type="text/javascript" src="../../Scripts/ngDialog.js"></script>
+
+    <script src="../../Scripts/bootstrap.js"></script>
+    <script src="../../Scripts/bootstrap-datepicker.js"></script>
+
+    <script type="text/javascript" src="../App.js"></script>
+
+    <script type="text/javascript" src="MainController.js"></script>
+    <script src="../AcompanhamentoDemanda/AcompanhamentoDemandaListaController.js"></script>
+    <script src="../ExpurgoSLA/ExpurgoListaController.js"></script>
+    <script src="../Home/IndexController.js"></script>
+
+</head>
+<body ng-app="App" ng-controller="MainController">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container col-md-12">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="btnonOffTrafo" ng-click="Exibe('HOME')" class="navbar-brand" style="cursor:pointer">ONS Sustentação</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a id="ctrlESLA" style="cursor:pointer">Expurgo SLA</a>
+                        <!--<a id="ctrlESLA" class="cursor:pointer" ng-click="Exibe('ESLA')">Expurgo SLA</a>-->
+                    </li>
+                    <li>
+                        <a id="ctrlACOM" style="cursor:pointer" ng-click="Exibe('ACOM');main.GetAcompanhamentos()">Acompanhamento de Demandas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content col-md-12" >
+        <!--<a href="../Home/Index.html">../Home/Index.html</a>-->
+        <div id="linhasPattoshow" class="col-sm-12" ng-include="'../Home/Index.html'" ng-controller="IndexController"
+             ng-show="main.filtro.ExibirPagina == 'HOME' ">
+        </div>
+        <!--<a href="../ExpurgoSLA/ExpurgoSLALista.html">../ExpurgoSLA/ExpurgoSLALista.html</a>-->
+        <div id="trafosPattoshow" class="col-sm-12" ng-include="'../ExpurgoSLA/ExpurgoLista.html'" ng-controller="ExpurgoListaController"
+             ng-show="main.filtro.ExibirPagina == 'ESLA' ">
+        </div>
+        <!--<a href="../AcompDemandas/AcompDemandasLista.html">../AcompDemandas/AcompDemandasLista.html</a>-->
+        <div id="fluxosPattoshow" class="col-sm-12" ng-include=" '../AcompanhamentoDemanda/AcompanhamentoDemandaLista.html' " ng-controller="AcompanhamentoDemandaListaController"
+             ng-show="main.filtro.ExibirPagina == 'ACOM' ">
+        </div>
+    </div>
+</body>
+
+</html>

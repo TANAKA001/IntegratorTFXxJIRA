@@ -1,0 +1,95 @@
+﻿@model IEnumerable<TFS_Dashboard.Repository.Model.AcompanhamentoDemanda>
+
+@{
+    ViewBag.Title = "Acompanhamento de Demandas";
+}
+
+<h2>Acompanhamento de Demandas</h2>
+
+<p>
+    @Html.ActionLink(" ", "Create", "", new { @class = "btn btn-default glyphicon glyphicon-plus", @title = "Inserir Acompanhamento" })
+</p>
+<table class="table table-hover table-responsive table-sm table-bordered">
+    <thead>
+        <tr>
+            <th style="width:3%;">
+                @Html.DisplayNameFor(model => model.Chave)
+            </th>
+            <th style="width:3%;">
+                @Html.DisplayNameFor(model => model.Id_WorkItem)
+            </th>
+            <th style="width:18%;"> 
+                @Html.DisplayNameFor(model => model.Dsc_Demanda)
+            </th>
+            <th style="width:8%;">
+                @Html.DisplayNameFor(model => model.Esteira)
+            </th>
+            <th style="width:6%;">
+                @Html.DisplayNameFor(model => model.Qtd_HorasTrabalhadas)
+            </th>
+            <th style="width:6%;">
+                @Html.DisplayNameFor(model => model.Qtd_HorasFaturadas)
+            </th>
+            <th style="width:9%;">
+                @Html.DisplayNameFor(model => model.Dt_Trabalho)
+            </th>
+            <th style="width:9%;">
+                @Html.DisplayNameFor(model => model.Dt_Faturamento)
+            </th>
+            <th style="width:10%;">
+                @Html.DisplayNameFor(model => model.Dsc_Observacao)
+            </th>
+            <th style="width:10%;">
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th style="width:10%;">
+                @Html.DisplayNameFor(model => model.StatusTFS)
+            </th>
+            <th style="width:8%;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Chave)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_WorkItem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dsc_Demanda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Esteira)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qtd_HorasTrabalhadas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qtd_HorasFaturadas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dt_Trabalho)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dt_Faturamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dsc_Observacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusTFS)
+                </td>
+                <td style=" text-align: center; padding-right: 0px; padding-left: 0px; ">
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn btn-default glyphicon glyphicon-pencil", @title = "Editar Acompanhamento" })
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "btn btn-default glyphicon glyphicon-search", @title = "Detalhar Acompanhamento" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

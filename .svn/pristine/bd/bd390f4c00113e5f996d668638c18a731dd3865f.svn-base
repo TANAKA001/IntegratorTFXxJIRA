@@ -1,0 +1,143 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
+using TFS_Dashboard.Repository.Context;
+using TFS_Dashboard.Repository.Model;
+
+namespace TFS_IntegradoraWeb.Views
+{
+    public partial class AcompanhamentoDemandaListaController : ApiController
+    {
+        private DashboardDatabase db = new DashboardDatabase();
+
+        [HttpPost]
+        public AcompanhamentoDemanda Detalhar([FromBody] dynamic filtro)
+        {
+
+            int id = 0;
+
+            AcompanhamentoDemanda acompanhamentoDemanda = db.AcompanhamentoDemanda.Find(id);
+
+            return acompanhamentoDemanda;
+        }
+
+        [HttpPost]
+        public dynamic ListarAcompanhamento()
+        {
+
+            var listaAcompanhamento = db.AcompanhamentoDemanda
+                                        .Select(s => new
+                                        {
+                                            s.DataFaturamento,
+                                            s.ChaveJira,
+                                            s.DataTrabalho,
+                                            s.Descricao,
+                                            s.Esteira,
+                                            s.Observacao,
+                                            s.QtdHorasFaturadas,
+                                            s.QtdHorasTrabalhadas,
+                                            s.UltimaAlteracao,
+                                            s.WorkItemID,
+                                            s.UsuarioCriador
+                                        }).ToList()
+                                        .Select(s => new
+                                         {
+                                             DataFaturamento = Convert.ToDateTime(s.DataFaturamento).ToString("dd/MM/yyyy"),
+                                             s.ChaveJira,
+                                             DataTrabalho = Convert.ToDateTime(s.DataTrabalho).ToString("dd/MM/yyyy"),
+                                             s.Descricao,
+                                             s.Esteira,
+                                             s.Observacao,
+                                             s.QtdHorasFaturadas,
+                                             s.QtdHorasTrabalhadas,
+                                             s.UltimaAlteracao,
+                                             s.WorkItemID,
+                                             s.UsuarioCriador
+                                         });
+
+            var listaEsteiras = listaAcompanhamento.Select(s => new { Valor = s.Esteira, Texto = s.Esteira }).Distinct();
+
+            return new
+            {
+                listaAcompanhamento,
+                totalHrsTrabalhada = listaAcompanhamento.Select(s => s.QtdHorasTrabalhadas).Sum().ToString(),
+                totalHrsFaturadas = listaAcompanhamento.Select(s => s.QtdHorasFaturadas).Sum().ToString(),
+                listaEsteiras
+            };
+        }
+        [HttpPost]
+        public dynamic FiltrarAcompanhamento([FromBody] dynamic filtro)
+        {
+            List<string> listEsteiras = new List<string>();
+            string esteiras = (filtro.Esteira == null) ? "" : filtro.Esteira.ToString();
+            
+            if (!string.IsNullOrEmpty(esteiras))
+            {
+                dynamic _esteiras = JsonConvert.DeserializeObject(esteiras);
+                foreach (var item in _esteiras)
+                {
+                    listEsteiras.Add(item.ToString());
+                }
+            }
+
+            DateTime? _dtTrabalhada = (filtro.DtTrabalhada == "" || filtro.DtTrabalhada == null) ? null : Convert.ToDateTime(filtro.DtTrabalhada.ToString());
+
+            DateTime? _dtFaturada = (filtro.DtFaturada == "" || filtro.DtFaturada == null) ? null : Convert.ToDateTime(filtro.DtFaturada.ToString());
+
+            int? _numJira = (filtro.NumJira == "" || filtro.NumJira == null) ?null:Convert.ToInt32(filtro.NumJira.ToString());
+
+            var acompanhamentos = db.AcompanhamentoDemanda
+                                        .Where(w =>
+                                        ((listEsteiras.Count() > 0) ? listEsteiras.Contains(w.Esteira.ToString()) : w.Esteira != null) &&
+                                        ((_dtTrabalhada != null ) ? w.DataTrabalho == _dtTrabalhada : true) &&
+                                        ((_dtFaturada != null ) ? w.DataFaturamento == _dtFaturada : true) &&
+                                        ((_numJira != null) ?w.ChaveJira == _numJira : true)
+                                        ).Select(s => new
+                                        {
+                                            s.DataFaturamento,
+                                            s.ChaveJira,
+                                            s.DataTrabalho,
+                                            s.Descricao,
+                                            s.Esteira,
+                                            s.Observacao,
+                                            s.QtdHorasFaturadas,
+                                            s.QtdHorasTrabalhadas,
+                                            s.UltimaAlteracao,
+                                            s.WorkItemID,
+                                            s.UsuarioCriador
+                                        }).ToList()
+                                        .Select(s => new
+                                         {
+                                             DataFaturamento = Convert.ToDateTime(s.DataFaturamento).ToString("dd/MM/yyyy"),
+                                             s.ChaveJira,
+                                             DataTrabalho = Convert.ToDateTime(s.DataTrabalho).ToString("dd/MM/yyyy"),
+                                             s.Descricao,
+                                             s.Esteira,
+                                             s.Observacao,
+                                             s.QtdHorasFaturadas,
+                                             s.QtdHorasTrabalhadas,
+                                             s.UltimaAlteracao,
+                                             s.WorkItemID,
+                                             s.UsuarioCriador
+                                         });
+
+            return new
+            {
+                listaAcompanhamento = acompanhamentos.ToList(),
+                totalHrsTrabalhada = acompanhamentos.Select(s => s.QtdHorasTrabalhadas).Sum().ToString(),
+                totalHrsFaturadas = acompanhamentos.Select(s => s.QtdHorasFaturadas).Sum().ToString(),
+            };
+        }
+
+        [HttpPost]
+        public AcompanhamentoDemanda PesquisarNumJira([FromBody] dynamic filtro) {
+
+            //AcompanhamentoDemanda _acompanhamento = db.AcompanhamentoDemanda
+            //                                        .Where(w => w.);
+
+            return null;
+        }
+    }
+}

@@ -1,0 +1,50 @@
+﻿
+
+
+namespace TFS_Dashboard.Repository.Model
+{
+
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+
+    public partial class AcompanhamentoDemanda
+    {
+        [Key]
+        public int? Id { get; set; }
+
+        [Display(Name = "Jira")]
+        public int? Chave { get; set; }
+
+        [Display(Name = "Work Item")]
+        public int? Id_WorkItem { get; set; }
+
+        [Display(Name = "Descrição da Demanda")]
+        public string Dsc_Demanda { get; set; }
+
+        [Display(Name = "Esteira")]
+        public string Esteira { get; set; }
+
+        [Display(Name = "Trabalhado")]
+        public int? Qtd_HorasTrabalhadas { get; set; }
+
+        [Display(Name = "Faturado")]
+        public int? Qtd_HorasFaturadas { get; set; }
+
+        [Display(Name = "Dia de trabalho")]
+        public DateTime? Dt_Trabalho { get; set; }
+
+        [Display(Name = "Data do faturamento")]
+        public DateTime? Dt_Faturamento { get; set; }
+
+        [Display(Name = "Observação")]
+        public string Dsc_Observacao { get; set; }
+
+        [Display(Name = "Status")]
+        public string Status { get; set; }
+
+        [Display(Name = "Status - TFS")]
+        public string StatusTFS { get; set; }
+
+    }
+}

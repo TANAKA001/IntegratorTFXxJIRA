@@ -1,0 +1,109 @@
+﻿namespace TFS_Dashboard.Repository.Context
+{
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
+    using TFS_Dashboard.Repository.Model;
+
+    public partial class DashboardDatabase : DbContext
+    {
+        public DashboardDatabase(): base("name=DashboardDatabase")
+        {
+
+        }
+
+        public virtual DbSet<EmailNotificacao> EmailNotificacao { get; set; }
+        public virtual DbSet<ExpurgoSLA> ExpurgoSLA { get; set; }
+        public virtual DbSet<Feriado> Feriado { get; set; }
+        public virtual DbSet<Jira_WorkItem> Jira_WorkItem { get; set; }
+        public virtual DbSet<LogProcessamento> LogProcessamento { get; set; }
+        public virtual DbSet<Notificacao> Notificacao { get; set; }
+        public virtual DbSet<Parametro> Parametro { get; set; }
+        public virtual DbSet<Revision> Revision { get; set; }
+        public virtual DbSet<Severidade> Severidade { get; set; }
+        public virtual DbSet<SLA> SLA { get; set; }
+        public virtual DbSet<TFS_Revisions> TFS_Revisions { get; set; }
+        public virtual DbSet<TFS_Updates> TFS_Updates { get; set; }
+        public virtual DbSet<TFS_WorkItem> TFS_WorkItem { get; set; }
+        public virtual DbSet<TipoDemanda> TipoDemanda { get; set; }
+        public virtual DbSet<WorkItem> WorkItem { get; set; }
+        public virtual DbSet<Log_InsercaoTFS> Log_InsercaoTFS { get; set; }
+        public virtual DbSet<Vw_Revisions> Vw_Revisions { get; set; }
+        public virtual DbSet<Vw_Updates> Vw_Updates { get; set; }
+        public virtual DbSet<Vw_WorkItem> Vw_WorkItem { get; set; }
+        public virtual DbSet<Vw_WorkItemExpurgo> Vw_WorkItemExpurgo { get; set; }
+        public virtual DbSet<AcompanhamentoDemanda> AcompanhamentoDemanda { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<EmailNotificacao>()
+                .Property(e => e.Notificacao)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<EmailNotificacao>()
+                .Property(e => e.TituloEmail)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<EmailNotificacao>()
+                .Property(e => e.TextoCorpoEmail)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Notificacao>()
+                .Property(e => e.Notificacao1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Revision>()
+                .Property(e => e.Status)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Severidade>()
+                .HasMany(e => e.SLA)
+                .WithRequired(e => e.Severidade)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TipoDemanda>()
+                .HasMany(e => e.SLA)
+                .WithRequired(e => e.TipoDemanda)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<WorkItem>()
+                .Property(e => e.StatusAtendimento_SLA_Analise)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<WorkItem>()
+                .Property(e => e.StatusAtendimento_SLA_Dimensionamento)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<WorkItem>()
+                .Property(e => e.StatusAtendimento_SLA_Entrega)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Vw_WorkItemExpurgo>()
+                .Property(e => e.StatusAtendimento_SLA_Analise)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Vw_WorkItemExpurgo>()
+                .Property(e => e.StatusAtendimento_SLA_Dimensionamento)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Vw_WorkItemExpurgo>()
+                .Property(e => e.StatusAtendimento_SLA_Entrega)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Jira_WorkItem>()
+                .Property(c => c.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Ide‌​ntity);
+
+            modelBuilder.Entity<Parametro>()
+                .Property(c => c.Id_Paramentro)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Ide‌​ntity);
+
+            modelBuilder.Entity<AcompanhamentoDemanda>()
+              .Property(c => c.Id)
+              .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Ide‌​ntity);
+
+            
+        }
+    }
+}

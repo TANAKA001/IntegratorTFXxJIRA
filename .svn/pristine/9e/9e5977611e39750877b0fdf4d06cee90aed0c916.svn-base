@@ -1,0 +1,6 @@
+﻿
+
+
+App.controller("AcompanhamentoDemandaController", function ($scope, $rootScope, ngDialog, $http, Util) {
+    $rootScope.DEFAULT = $scope;
+});

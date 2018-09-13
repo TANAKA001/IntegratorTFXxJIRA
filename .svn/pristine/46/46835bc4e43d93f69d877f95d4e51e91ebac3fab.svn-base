@@ -1,0 +1,198 @@
+﻿.ag-ons
+{
+    height: 500px;
+}
+.ag-ons . direita
+{
+    float:right!important;
+}
+    .ag-ons .ag-root {
+        border: 1px solid #337ab7;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+.ag-ons .ag-cell {
+  /*border-right: 1px solid #808080;*/
+  padding: 2px;
+}
+.ag-ons .ag-cell-focus {
+  border: 1px solid #a9a9a9;
+}
+.ag-ons .ag-cell-no-focus {
+  border-right: 1px dotted #808080;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+.ag-ons .ag-pinned-header {
+  background: -webkit-linear-gradient(#337ab7, #2e6da4);
+  background: -moz-linear-gradient(#337ab7, #2e6da4);
+  background: -o-linear-gradient(#337ab7, #2e6da4);
+  background: -ms-linear-gradient(#337ab7, #2e6da4);
+  background: linear-gradient(#337ab7, #2e6da4);
+  border-bottom: 1px solid #808080;
+}
+.ag-ons .ag-header-container {
+  background: -webkit-linear-gradient(#337ab7, #2e6da4);
+  background: -moz-linear-gradient(#337ab7, #2e6da4);
+  background: -o-linear-gradient(#337ab7, #2e6da4);
+  background: -ms-linear-gradient(#337ab7, #2e6da4);
+  background: linear-gradient(#337ab7, #2e6da4);
+  border-bottom: 1px solid #808080;
+}
+.ag-ons .ag-header-cell {
+  border-right: 1px solid #808080;
+}
+.ag-ons .ag-header-group-cell {
+  border-right: 1px solid #808080;
+}
+.ag-ons .ag-header-group-cell-with-group {
+  border-bottom: 1px solid #808080;
+}
+.ag-ons .ag-header-cell-label {
+  padding: 4px 2px 4px 2px;
+}
+.ag-ons .ag-header-cell-text {
+  padding-left: 2px;
+  color:#ffffff;
+  /*font-weight:bold;*/
+}
+.ag-ons .ag-header-group-cell-label {
+  padding: 4px;
+  font-weight: bold;
+}
+.ag-ons .ag-header-group-text {
+  margin-right: 2px;
+}
+.ag-ons .ag-header-cell-menu-button {
+  padding: 2px;
+  margin-top: 4px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box; /* When using bootstrap, box-sizing was set to 'border-box' */
+}
+.ag-ons .ag-header-cell-menu-button:hover {
+  border: 1px solid #000;
+}
+.ag-ons .ag-header-icon {
+  color: #800000;
+}
+.ag-ons .ag-dark .ag-header-expand-icon:hover {
+  cursor: pointer;
+}
+    .ag-ons .ag-row-odd {
+        background-color: #deeff5;
+    }
+.ag-ons .ag-row-even {
+  background-color: #fff;
+}
+.ag-ons .ag-loading-panel {
+  background-color: rgba(255,255,255,0.5);
+}
+.ag-ons .ag-loading-center {
+  background-color: #fff;
+  border: 1px solid #a9a9a9;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.ag-ons .ag-body {
+  background-color: rgb(239,243,228);
+  padding-top: 25px; 
+  padding-bottom: 0px;
+    /*background: -webkit-linear-gradient(#2e6da4, #80ab00);
+  background: -moz-linear-gradient(#2e6da4, #80ab00);
+  background: -o-linear-gradient(#2e6da4, #80ab00);
+  background: -ms-linear-gradient(#2e6da4, #80ab00);
+  background: linear-gradient(#2e6da4, #80ab00);*/
+
+}
+.ag-ons .ag-row-selected {
+  background-color: #b2dfee;
+}
+.ag-ons .ag-group-cell-entire-row {
+  background-color: #aaa;
+  padding: 4px;
+}
+.ag-ons .ag-footer-cell-entire-row {
+  background-color: #aaa;
+  padding: 4px;
+}
+.ag-ons .ag-group-cell {
+  font-style: italic;
+}
+.ag-ons .ag-footer-cell {
+  font-style: italic;
+}
+.ag-ons .ag-filter-checkbox {
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+.ag-ons .ag-filter-header-container {
+  border-bottom: 1px solid #80ab00;
+}
+.ag-ons .ag-filter {
+  border: 1px solid #000;
+  background-color: rgb(239,243,228);
+}
+.ag-ons .ag-selection-checkbox {
+  margin-left: 4px;
+}
+.ag-ons .ag-paging-panel {
+  padding: 4px;
+}
+.ag-ons .ag-paging-button {
+  margin-left: 4px;
+  margin-right: 4px;
+  padding-top:1px;
+  padding-bottom:1px;
+  background-color:#2e6da4;
+  display: inline-block;
+  padding: 2px 10px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.ag-ons .ag-paging-button:hover,
+.ag-ons .ag-paging-button:focus,
+.ag-ons .ag-paging-button:active,
+.ag-ons .ag-paging-button.active,
+.open .dropdown-toggle.ag-ons .ag-paging-button {
+  color: #ffffff;
+  background-color: #486018;
+}
+
+.ag-ons .ag-paging-button.disabled,
+.ag-ons .ag-paging-button[disabled],
+fieldset[disabled] .ag-ons .ag-paging-button
+{
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  opacity: .65;
+}
+
+
+.ag-ons .ag-paging-row-summary-panel {
+  display: inline-block;
+  width: 300px;
+}

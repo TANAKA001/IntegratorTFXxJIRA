@@ -1,0 +1,88 @@
+﻿
+<div class="row">
+    <div class="panel panel-primary" style="margin:10px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {{gerAcompanhamento.title}}
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-sm-12">
+                <label class="danger">{{gerAcompanhamento.msg}}</label>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <label class="editor-label" title="">
+                        Num. Jira:
+                    </label>
+                    <input type="text" class="col-sm-12 form-control" ng-change="gerAcompanhamento.Pesquisar()" ng-model="gerAcompanhamento.filtro.NumJira" required maxlength="12" placeholder="Cod Jira..." />
+                </div>
+                <div class="col-sm-4">
+                    <label class="editor-label" title="">
+                        WorkItem:
+                    </label>
+                    <input type="text" class="col-sm-12 form-control" ng-change="gerAcompanhamento.validaWorkItem()" ng-model="gerAcompanhamento.filtro.WorkItem"  required maxlength="12" placeholder="Work Item..." ng-disabled="gerAcompanhamento.disabled.WorkItem"/>
+                </div>
+                <div class="col-sm-4">
+                    <label class="editor-label" title="">
+                        Esteira:
+                    </label>
+                    <select class="col-sm-12 form-control" ng-model="gerAcompanhamento.filtro.Esteira" ng-disabled="gerAcompanhamento.disabled.Esteira">
+                        <option ng-repeat="acompanhamento in gerAcompanhamento.listaEsteiras" value="{{acompanhamento.Valor}}">{{acompanhamento.Texto}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <!------------------------------------------------------------------------------------------------------------------------->
+                <div class="col-sm-3">
+                    <label class="editor-label" title="">
+                        Data do Trabalho:
+                    </label>
+                    <input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" class="col-sm-4 form-control datepicker" ng-model="gerAcompanhamento.filtro.DtTrabalhada" placeholder="Data Trabalhada..." ng-model-options="{debounce: 450}"  ng-disabled="gerAcompanhamento.disabled.DtTrabalhada"/>
+                </div>
+                <div class="col-sm-3">
+                    <label class="editor-label" title="">
+                        Hrs Trabalhadas:
+                    </label>
+                    <input type="number" class="col-sm-12 form-control"  ng-model="gerAcompanhamento.filtro.HrsTrabalhadas" required maxlength="12" placeholder="Hrs Trabalhadas" ng-disabled="gerAcompanhamento.disabled.HrsTrabalhadas"/>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------------------->
+                <div class="col-sm-3">
+                    <label class="editor-label" title="">
+                        Data de Faturamento:
+                    </label>
+                    <input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" class="col-sm-4 form-control datepicker" ng-model="gerAcompanhamento.filtro.DtFaturada"  placeholder="Data Faturada..." ng-model-options="{debounce: 450}"  ng-disabled="gerAcompanhamento.disabled.DtFaturada"/>
+                </div>
+                <div class="col-sm-3">
+                    <label class="editor-label" title="">
+                        Hrs Faturadas:
+                    </label>
+                    <input type="number" class="col-sm-12 form-control" ng-model="gerAcompanhamento.filtro.HrsFaturadas" required maxlength="12" placeholder="Hrs Faturadas"  ng-disabled="gerAcompanhamento.disabled.HrsFaturadas" max="{{gerAcompanhamento.filtro.MaxHrs}}" limit-to-max/>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------------------->
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <label class="editor-label" title="">
+                        Descricao:
+                    </label>
+                    <input type="text" class="col-sm-12 form-control"  ng-model="gerAcompanhamento.filtro.Descricao" required maxlength="12" placeholder="Código..."  ng-disabled="gerAcompanhamento.disabled.Descicao"/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <label class="editor-label" title="">
+                        Observacao:
+                    </label>
+                    <input type="text" class="col-sm-12 form-control" ng-model="gerAcompanhamento.filtro.Observacao"  required maxlength="12"  ng-disabled="gerAcompanhamento.disabled.Observacao" />
+                </div>
+            </div>
+            <div class="col-sm-12" style="margin:10px 0 0 0;">
+                <div class="col-sm-6">
+                    <input type="button" class="btn btn-primary" ng-show="gerAcompanhamento.filtro.podeSalvar == 'S'" ng-click="gerAcompanhamento.Salvar()" value="Salvar" />
+                    <input type="button" class="btn btn-primary" ng-click="gerAcompanhamento.Limpar()" value="Limpar campos"  ng-show="ngDialogData.origem == 'Incluir'"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TFS_Dashboard.Repository.Model.ExpurgoSLA>
+
+@{
+    ViewBag.Title = "Expurgo SLA";
+}
+
+<h2>Expurgo SLA</h2>
+
+<p>
+    @Html.ActionLink(" ", "Create", "", new { @class = "btn btn-default glyphicon glyphicon-plus", @title = "Inserir Expurgo SLA" })
+</p>
+<table class="table table-hover table-responsive table-sm table-bordered">
+    <thead>
+        <tr>
+            <th style="width: 6%;">
+                @Html.DisplayNameFor(model => model.WorkItemID)
+            </th>
+            <th style="width: 10%;">
+                @Html.DisplayNameFor(model => model.TeamProject)
+            </th>
+            <th style="width: 5%;">
+                @Html.DisplayNameFor(model => model.Indicador)
+            </th>
+            <th style="width: 7%;">
+                @Html.DisplayNameFor(model => model.Dt_Perda)
+            </th>
+            <th style="width: 55%;">
+                @Html.DisplayNameFor(model => model.Dsc_Justificativa)
+            </th>
+            <th style="width: 8%;">
+                @Html.DisplayNameFor(model => model.In_Expurgado)
+            </th>
+            <th style="width: 7%;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkItemID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamProject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Indicador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dt_Perda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dsc_Justificativa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.In_Expurgado)
+                </td>
+                <td style=" text-align: center; padding-right: 0px; padding-left: 0px; ">
+                    @Html.ActionLink(" ", "Edit", new { id = item.WorkItemID }, new { @class = "btn btn-default glyphicon glyphicon-pencil", @title = "Editar Expurgo SLA" })
+                    @Html.ActionLink(" ", "Details", new { id = item.WorkItemID }, new { @class = "btn btn-default glyphicon glyphicon-search", @title = "Detalhar Expurgo SLA" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

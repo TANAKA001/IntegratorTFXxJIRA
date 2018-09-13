@@ -1,0 +1,65 @@
+﻿@model TFS_Dashboard.Repository.Model.ExpurgoSLA
+
+@{
+    ViewBag.Title = "Detalhe";
+}
+
+<h2>Detalhe</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkItemID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkItemID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Indicador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Indicador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dt_Perda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dt_Perda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dsc_Justificativa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dsc_Justificativa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.In_Expurgado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.In_Expurgado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.WorkItemID }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

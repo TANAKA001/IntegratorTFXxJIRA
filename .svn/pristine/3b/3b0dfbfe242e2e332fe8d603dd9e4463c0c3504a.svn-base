@@ -1,0 +1,69 @@
+﻿
+<div class="panel panel-primary" style="margin-top:50px">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Acompanhamento de Demandas
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-sm-12">
+            <div class="col-sm-3">
+                <label class="editor-label" title="">
+                    Esteira:
+                </label>
+                <select class="col-sm-12 form-control" ng-model="acompanhamento.filtro.Esteira" ng-click="acompanhamento.Pesquisar()" multiple style="height:95px;">
+                    <option ng-repeat="acompanhamento in acompanhamento.listaAcompanhamento.listaEsteiras" value="{{acompanhamento.Valor}}">{{acompanhamento.Texto}}</option>
+                </select>
+            </div>
+            <div class="col-sm-9">
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label class="editor-label" title="">
+                            Data trabalhada:
+                        </label>
+                        <input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" class="col-sm-4 form-control datepicker" ng-model="acompanhamento.filtro.DtTrabalhada" ng-change="acompanhamento.Pesquisar()" placeholder="Data Trabalhda..." ng-model-options="{debounce: 450}" />
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label class="editor-label" title="">
+                            Data Faturada:
+                        </label>
+                        <input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" class="col-sm-4 form-control" ng-model="acompanhamento.filtro.DtFaturada" ng-change="acompanhamento.Pesquisar()" placeholder="Data Faturada..." ng-model-options="{debounce: 450}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12" style="text-align:Left">
+                <div>
+                    <input type="button" class="btn btn-primary" ng-show="acompanhamento.acoes.Incluir" ng-click="Incluir()" value="Incluir" />
+                    <input type="button" class="btn btn-primary" ng-show="acompanhamento.acoes.Editar" ng-click="Editar()" value="Editar" />
+                    <input type="button" class="btn btn-primary" ng-show="acompanhamento.acoes.Dividir" ng-click="Dividir()" value="Dividir" />
+                    <input type="button" class="btn btn-primary" ng-show="acompanhamento.acoes.Apagar" ng-click="Apagar()" value="Apagar" />
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding:10px;">
+            <div angular-grid="grid.gridOptions" class="ag-ons">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 text-right">
+                <span><b>TOTAL:</b></span>
+            </div>
+            <div class="col-sm-4">
+                <label>Horas Trabalhadas</label>
+                <span>{{acompanhamento.totalHrsTrabalhada}}</span>
+            </div>
+            <div class="col-sm-4">
+                <label>Horas Faturadas</label>
+                <span>{{acompanhamento.totalHrsFaturadas}}</span>
+            </div>
+        </div>
+    </div>
+</div>

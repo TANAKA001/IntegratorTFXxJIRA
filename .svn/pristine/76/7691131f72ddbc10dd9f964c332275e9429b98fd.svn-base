@@ -1,0 +1,106 @@
+﻿
+angular.module("App").requires.push('angularGrid');
+
+App.controller("AcompanhamentoDemandaListaController", function ($scope, $rootScope, $window, ngDialog, $http, Util) {
+
+    $rootScope.acompanhamento = $scope;
+    $scope.acompanhamento = {};
+
+    $scope.acompanhamento.filtro = {};
+    $scope.acompanhamento.listaAcompanhamento = {};
+    $scope.acompanhamento.totalHrsTrabalhada = "";
+    $scope.acompanhamento.totalHrsFaturadas = "";
+
+    App.acompanhamento = {};
+
+    $scope.grid = {};
+    $scope.grid.gridOptions = {
+
+        angularCompileRows: true,
+        rowData: [],
+        cellValueChanged: function (event) {
+            var data = event.data;
+        },
+        enableColResize: true,
+    }
+
+    $scope.GetAcompanhamentos = function(){
+        
+        $http.post("../AcompanhamentoDemandaLista/ListarAcompanhamento").success(function (resultado) {
+
+            $scope.acompanhamento.listaAcompanhamento = resultado;
+
+            $scope.acompanhamento.listaAcompanhamento.listaEsteiras = resultado.listaEsteiras
+            $scope.grid.gridOptions.api.sizeColumnsToFit();
+            Util.setRowsGrid($scope.grid, resultado.listaAcompanhamento);
+
+            $scope.acompanhamento.totalHrsTrabalhada = resultado.totalHrsFaturadas;
+            $scope.acompanhamento.totalHrsFaturadas = resultado.totalHrsFaturadas;
+
+        }).error(function (erro) {
+            serviceUtil.delegateErro(erro);
+        
+        });
+    }
+    
+    $scope.columnDefinitions = function () {
+
+    
+        return columnDefs;
+    } 
+
+    App.acompanhamento.columnDefinitions = function () {
+        var larguraTela = (1024 - 80);
+        var largura = larguraTela * 0.334;
+
+        if (largura < 150) {
+            largura = 150;
+        }
+
+        var columnDefs = [
+            { displayName: "Nº JIRA",  field: "ChaveJira", width: 20 },
+            { displayName: "WorkItem", field: "WorkItemID", width: 20 },
+            { displayName: "Descricao", field: "Descricao", width: 70 },
+            { displayName: "Esteira", field: "Esteira", width: 20 },
+            { displayName: "Data Trabalhada", field: "DataTrabalho", width: 20, },
+            { displayName: "Hrs Trabalhadas", field: "QtdHorasTrabalhadas", width: 20 },
+            { displayName: "Data Faturamento", field: "DataFaturamento", width: 20, },
+            { displayName: "Hrs Faturadas", field: "QtdHorasFaturadas", width: 20, },
+            { displayName: "OBS", field: "", width: 30, },
+            { displayName: "Acoes", field: "", width: 5, },
+        ];
+
+        return columnDefs;
+    }
+
+    $scope.grid.gridOptions = Util.getDefaultGridOptions();
+    $scope.grid.gridOptions.columnDefs = App.acompanhamento.columnDefinitions();
+    $scope.grid.gridOptions.angularCompileRows = true;
+    
+    //Util.bindGrid($scope.acompanhamento);
+
+
+    $scope.acompanhamento.Pesquisar = function () {
+
+        // Util.bindGrid($scope.acompanhamento);
+        $http.post("../AcompanhamentoDemandaLista/FiltrarAcompanhamento", $scope.acompanhamento.filtro).success(function (resultado) {
+
+            $scope.grid.gridOptions.api.sizeColumnsToFit();
+            Util.setRowsGrid($scope.grid, []);
+            Util.setRowsGrid($scope.grid, resultado.listaAcompanhamento);
+
+            $scope.acompanhamento.totalHrsTrabalhada = resultado.totalHrsFaturadas;
+            $scope.acompanhamento.totalHrsFaturadas = resultado.totalHrsFaturadas;
+
+        }).error(function (erro) {
+            serviceUtil.delegateErro(erro);
+
+        });
+    };
+
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: '-3d'
+    });
+
+});

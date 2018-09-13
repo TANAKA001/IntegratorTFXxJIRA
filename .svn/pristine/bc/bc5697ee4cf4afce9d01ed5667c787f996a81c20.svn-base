@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+  </startup>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-10.0.0.0" newVersion="10.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <appSettings>
+    <add key="TFS_Url" value="http://172.20.249.88:8080/tfs/ONS/" />
+    <add key="Maior" value="\u003e" />
+    <add key="Menor" value="\u003cONS" />
+    <add key="PersonalToken" value="zh65btia7l5qikejb37g72gpmqo2ic2th2677hkgvw5aw4fsajuq" />
+    <add key="ConnectionString" value="Server=SRV17524\SRV17524_SQL2016;Database=TFS_Integradora;Integrated Security=SSPI;" />
+  </appSettings>
+</configuration>

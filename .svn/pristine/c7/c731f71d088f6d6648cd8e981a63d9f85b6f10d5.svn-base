@@ -1,0 +1,67 @@
+﻿
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Expurgo SLA
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-sm-12">
+            <div class="col-sm-3">
+                <label class="editor-label" title="">
+                    WorItem:
+                </label>
+                <form-autocomplete data-options="" ng-model="expurgo.workItem" ng-change="Pesquisar()" place-holder="Selecione..."></form-autocomplete>
+            </div>
+            <div class="col-sm-3">
+                <label class="editor-label" title="">
+                    TeamProject:
+                </label>
+                <form-autocomplete data-options="" ng-model="expurgo.teamProject" ng-change="Pesquisar()" place-holder="Selecione..."></form-autocomplete>
+            </div>
+            <div class="col-sm-3">
+                <label class="editor-label" title="">
+                    Indicador:
+                </label>
+                <form-autocomplete data-options="" ng-model="expurgo.Indicador" ng-change="Pesquisar()" place-holder="Selecione..."></form-autocomplete>
+            </div>
+            <div class="col-sm-3">
+                <label class="editor-label" title="">
+                    Data Perda:
+                </label>
+                <form-autocomplete data-options="" ng-model="expurgo.DtPerda" ng-change="Pesquisar()" place-holder="Selecione..."></form-autocomplete>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <label class="editor-label" title="">
+                    Justificativa:
+                </label>
+                <form-autocomplete data-options="" ng-model="expurgo.justificativa" ng-change="Pesquisar()" place-holder="Selecione..."></form-autocomplete>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li><input type="button" class="btn btn-primary btn-menu" ng-show="permissao.PodeIncluir" ng-click="Incluir()" value="Incluir" /></li>
+                <li><input type="button" class="btn btn-primary btn-menu" ng-show="permissao.PodeEditar" ng-click="Editar()" value="Editar" /></li>
+                <li><input type="button" class="btn btn-primary btn-menu" ng-show="permissao.PodeExcluir" ng-click="Apagar()" value="Apagar" /></li>
+                <li><input type="button" class="btn btn-primary btn-menu" ng-show="permissao.PodeExportar" ng-click="Exportar()" value="Exportar" /></li>
+            </ul>
+        </div>
+    </nav>
+    <div angular-grid="grid.gridOptions" >
+    </div>
+</div>

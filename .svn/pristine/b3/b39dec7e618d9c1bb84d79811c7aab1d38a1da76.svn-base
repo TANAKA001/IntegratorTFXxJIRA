@@ -1,0 +1,143 @@
+﻿
+angular.module("App").requires.push('angularGrid');
+
+App.controller("AcompanhamentoDemandaListaController", function ($scope, $rootScope, $window, ngDialog, $http, Util) {
+
+    $rootScope.acompanhamento = $scope;
+    $scope.acompanhamento = {};
+
+    $scope.acompanhamento.filtro = {};
+    $scope.acompanhamento.listaAcompanhamento = {};
+    $scope.acompanhamento.totalHrsTrabalhada = "";
+    $scope.acompanhamento.totalHrsFaturadas = "";
+    $scope.acompanhamento.acoes = {}
+    $scope.acompanhamento.acoes.Incluir = "";
+    $scope.acompanhamento.acoes.Editar = "";
+    $scope.acompanhamento.acoes.Dividir = "";
+    $scope.acompanhamento.acoes.Apagar = "";
+
+    App.acompanhamento = {};
+
+    $scope.grid = {};
+    $scope.grid.gridOptions = {
+
+        angularCompileRows: true,
+        rowData: [],
+        cellValueChanged: function (event) {
+            var data = event.data;
+        },
+        enableColResize: true,
+    }
+
+    $scope.ControleAcesso = function () {
+
+        $scope.acompanhamento.acoes.Incluir = $rootScope.main.Incluir;
+        $scope.acompanhamento.acoes.Editar = $rootScope.main.Editar;
+        $scope.acompanhamento.acoes.Dividir = $rootScope.main.Dividir;
+        $scope.acompanhamento.acoes.Apagar = $rootScope.main.Apagar;
+    }
+
+    $scope.GetAcompanhamentos = function () {
+
+        $scope.ControleAcesso();
+
+        $http.post("../AcompanhamentoDemandaLista/ListarAcompanhamento").success(function (resultado) {
+
+            $scope.acompanhamento.listaAcompanhamento = resultado;
+
+            $scope.acompanhamento.listaAcompanhamento.listaEsteiras = resultado.listaEsteiras
+            $scope.grid.gridOptions.api.sizeColumnsToFit();
+            Util.setRowsGrid($scope.grid, resultado.listaAcompanhamento);
+
+            $scope.acompanhamento.totalHrsTrabalhada = resultado.totalHrsTrabalhada;
+            $scope.acompanhamento.totalHrsFaturadas = resultado.totalHrsFaturadas;
+
+        }).error(function (erro) {
+            serviceUtil.delegateErro(erro);
+
+        });
+    }
+
+    $scope.columnDefinitions = function () {
+
+
+        return columnDefs;
+    }
+
+    App.acompanhamento.columnDefinitions = function () {
+        var larguraTela = (1024 - 80);
+        var largura = larguraTela * 0.334;
+
+        if (largura < 150) {
+            largura = 150;
+        }
+
+        var columnDefs = [
+            { displayName: "Nº JIRA", field: "ChaveJira", width: 20 },
+            { displayName: "WorkItem", field: "WorkItemID", width: 20 },
+            { displayName: "Descricao", field: "Descricao", width: 70 },
+            { displayName: "Esteira", field: "Esteira", width: 20 },
+            { displayName: "Data Trabalhada", field: "DataTrabalho", width: 20, },
+            { displayName: "Hrs Trabalhadas", field: "QtdHorasTrabalhadas", width: 20 },
+            { displayName: "Data Faturamento", field: "DataFaturamento", width: 20, },
+            { displayName: "Hrs Faturadas", field: "QtdHorasFaturadas", width: 20, },
+            { displayName: "OBS", field: "", width: 30, },
+            { displayName: "Acoes", field: "", width: 5, },
+        ];
+
+        return columnDefs;
+    }
+
+    $scope.grid.gridOptions = Util.getDefaultGridOptions();
+    $scope.grid.gridOptions.columnDefs = App.acompanhamento.columnDefinitions();
+    $scope.grid.gridOptions.angularCompileRows = true;
+
+    $scope.acompanhamento.Pesquisar = function () {
+
+        // Util.bindGrid($scope.acompanhamento);
+        $http.post("../AcompanhamentoDemandaLista/FiltrarAcompanhamento", $scope.acompanhamento.filtro).success(function (resultado) {
+
+            $scope.grid.gridOptions.api.sizeColumnsToFit();
+            Util.setRowsGrid($scope.grid, []);
+            Util.setRowsGrid($scope.grid, resultado.listaAcompanhamento);
+
+            $scope.acompanhamento.totalHrsTrabalhada = resultado.totalHrsTrabalhada;
+            $scope.acompanhamento.totalHrsFaturadas = resultado.totalHrsFaturadas;
+
+        }).error(function (erro) {
+            serviceUtil.delegateErro(erro);
+
+        });
+    };
+
+    $('.datepicker').datepicker();
+
+
+    $scope.Incluir = function (_origem) {
+        ngDialog.open({
+            template: '../AcompanhamentoDemanda/AcompanhamentoDemanda.html',
+            controller: 'AcompanhamentoDemandaController',
+            classname: 'ngdialog-theme-default ',
+            data: { origem: "Incluir" }
+        });
+    }
+
+    $scope.Editar = function () {
+        ngDialog.open({
+            template: '../AcompanhamentoDemanda/AcompanhamentoDemanda.html',
+            controller: 'AcompanhamentoDemandaController ',
+            classname: 'ngdialog-theme-default',
+            data: { origem: "Editar" }
+        });
+    }
+
+    $scope.Dividir = function () {
+        ngDialog.open({
+            template: '../AcompanhamentoDemanda/AcompanhamentoDemanda.html',
+            controller: 'AcompanhamentoDemandaController ',
+            classname: 'ngdialog-theme-default',
+            data: { origem: "Dividir" }
+        });
+    }
+
+});

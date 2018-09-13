@@ -1,0 +1,28 @@
+﻿
+angular.module("App").requires.push('angularGrid');
+
+App.controller("MainController", function ($scope, $rootScope, ngDialog, $http, Util) {
+
+    $scope.main = {};
+    $scope.main.filtro = {};
+
+    App.main = {};
+
+    $scope.default = function () {
+
+        $scope.main.filtro.ExibirPagina = 'HOME';
+    }
+
+    $scope.Exibe = function (param) {
+
+        $scope.main.filtro.ExibirPagina = param;
+    }
+
+    $scope.Pesquisar = function () {
+        alert("nao é aqui");
+    }
+
+    $scope.main.GetAcompanhamentos = function () {
+        $rootScope.acompanhamento.GetAcompanhamentos();
+    }
+});

@@ -1,0 +1,48 @@
+﻿
+
+
+App.controller("AcompanhamentoDemandaController", function ($scope, $rootScope, ngDialog, $http, Util) {
+
+    $rootScope.gerAcompanhamento = $scope;
+    $scope.gerAcompanhamento = {}
+    $scope.gerAcompanhamento.title = $scope.ngDialogData.origem + " demanda.";
+    $scope.gerAcompanhamento.filtro = {};
+
+    $scope.gerAcompanhamento.resultado = {}
+    $scope.gerAcompanhamento.resultado.DtTrabalhada = "";
+    $scope.gerAcompanhamento.resultado.DtFaturada = "";
+    $scope.gerAcompanhamento.resultado.Esteira = "";
+    $scope.gerAcompanhamento.resultado.HrsTrabalhadas = "";
+    $scope.gerAcompanhamento.resultado.HrsFaturadas = "";
+    $scope.gerAcompanhamento.resultado.WorkItem = "";
+    $scope.gerAcompanhamento.resultado.Descricao = "";
+    $scope.gerAcompanhamento.resultado.Observacao = "";
+
+
+    $scope.gerAcompanhamento.Salvar = function () {
+        alert("there");
+    }
+
+    $scope.gerAcompanhamento.Pesquisar = function () {
+
+        $http.post("../AcompanhamentoDemandaLista/FiltrarAcompanhamento", $scope.gerAcompanhamento.filtro).success(function (resultado) {
+            if (resultado.listaAcompanhamento.length > 0) {
+
+
+                $scope.gerAcompanhamento.resultado.DtTrabalhada = resultado.listaAcompanhamento[0].DataTrabalho;
+                $scope.gerAcompanhamento.resultado.DtFaturada = resultado.listaAcompanhamento[0].DataFaturamento;
+                $scope.gerAcompanhamento.resultado.Esteira = resultado.listaAcompanhamento[0].Esteira;
+                $scope.gerAcompanhamento.resultado.HrsTrabalhadas = resultado.listaAcompanhamento[0].QtdHorasTrabalhadas;
+                $scope.gerAcompanhamento.resultado.HrsFaturadas = resultado.listaAcompanhamento[0].QtdHorasFaturadas;
+                $scope.gerAcompanhamento.resultado.WorkItem = resultado.listaAcompanhamento[0].WorkItemID;
+                $scope.gerAcompanhamento.resultado.Descricao = resultado.listaAcompanhamento[0].Descricao;
+                $scope.gerAcompanhamento.resultado.Observacao = resultado.listaAcompanhamento[0].Observacao;
+            }
+
+        }).error(function (erro) {
+            serviceUtil.delegateErro(erro);
+
+        });
+    }
+
+});
